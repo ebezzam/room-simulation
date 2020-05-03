@@ -1,4 +1,6 @@
-# Room impulse response generation for Interspeech 2020 paper
+# Room impulse response generation code
+
+Supporting code for the paper "A study on more realistic room simulation for far-field keyword spotting".
 
 ## Installation
 

@@ -2,6 +2,8 @@
 
 Supporting code for the paper "A study on more realistic room simulation for far-field keyword spotting".
 
+RIR only dataset should be downloaded [here](https://speech.fit.vutbr.cz/software/but-speech-fit-reverb-database).
+
 ## Installation
 
 First install Python dependencies:
@@ -23,7 +25,6 @@ for additional dependencies to install.
 ## Main scripts
 
 Create train / dev split from BUT ReverbDB dataset: `create_measured_room_data_split.py`
-RIR only dataset should be downloaded [here](https://speech.fit.vutbr.cz/software/but-speech-fit-reverb-database).
 
 Simulate a particular dataset desired parameters (ISM order, air absorption, 
 scattering- and frequency-dependent absorption coefficients, ray tracing, 

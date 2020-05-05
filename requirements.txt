@@ -1,0 +1,7 @@
+pandas
+numpy
+Cython
+pybind11
+soundfile
+click
+matplotlib

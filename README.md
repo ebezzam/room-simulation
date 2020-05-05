@@ -22,12 +22,8 @@ pip install git+https://github.com/RoyJames/pygsound
 For `pygsound`, please refer to their [project page](https://github.com/RoyJames/pygsound)
 for additional dependencies to install.
 
-## Main scripts
+## Scripts
 
-Create train / dev split from BUT ReverbDB dataset: `create_measured_room_data_split.py`
-
-Simulate a particular dataset desired parameters (ISM order, air absorption, 
-scattering- and frequency-dependent absorption coefficients, ray tracing, 
-simulation software): `simulate_measured_room_dataset.py`
-
-Compare computation time between `pyroomacoustics` and `pygsound`: `profile_nrays.py`
+Compare computation time between `pyroomacoustics` and `pygsound`: 
+- Varying number of rays: `profile_nrays.py`
+- Varying number of specular reflections / ISM order: `profile_ism_order.py`

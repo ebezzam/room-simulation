@@ -167,6 +167,7 @@ def compute_room_irs(
         }
         if ray_tracing_param is not None:
             pyroomacoustics_rt_param.update(ray_tracing_param)
+
         room = pra.room.ShoeBox(
             p=room_dim,
             fs=sample_rate,

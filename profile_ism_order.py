@@ -71,7 +71,6 @@ def profile_room_gen(n_trials):
 
     # plot results
     plt.figure()
-    specular_count = [6**order for order in ism_order_vals]
     for i, _software in enumerate(software):
         _proc_time = []
         for ism_order in ism_order_vals:
@@ -80,15 +79,14 @@ def profile_room_gen(n_trials):
             else:
                 break
         plt.plot(
-            specular_count[:len(_proc_time)],
+            ism_order_vals[:len(_proc_time)],
             _proc_time,
             label=_software,
             marker=markers[i]
         )
 
     plt.legend()
-    plt.xscale("log")
-    plt.xlabel("Specular count")
+    plt.xlabel("Specular depth / ISM order")
     plt.ylabel("Processing time [s]")
     plt.grid()
     plt.tight_layout()

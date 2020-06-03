@@ -44,6 +44,7 @@ def profile_room_gen(n_trials):
                 ray_tracing_param = {
                     "diffuse_count": int(n_rays),
                     "specular_count": 6 ** ism_order,
+                    "specular_depth": ism_order,
                 }
             elif _software == RoomSimSoftware.PYROOMACOUSTICS:
                 ray_tracing_param = {"n_rays": int(n_rays)}

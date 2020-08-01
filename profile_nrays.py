@@ -24,6 +24,7 @@ def profile_room_gen(n_trials):
         RoomSimSoftware.PYGSOUND,
         RoomSimSoftware.PYROOMACOUSTICS,
     ]
+    n_std = 1
 
     markers = ["o", "^", "v", "x", ">", "<", "D", "+"]
 
@@ -31,10 +32,12 @@ def profile_room_gen(n_trials):
     n_ray_vals = np.array([1e3, 3e3, 1e4, 3e4, 1e5], dtype=int)
     ism_order = 3
     proc_time = dict()
+    proc_time_std = dict()
     for n_rays in n_ray_vals:
 
         print("number of rays : {}".format(n_rays))
         proc_time[n_rays] = dict()
+        proc_time_std[n_rays] = dict()
 
         # loop through software
         for _software in software:
@@ -50,8 +53,9 @@ def profile_room_gen(n_trials):
                 ray_tracing_param = {"n_rays": int(n_rays)}
             assert ray_tracing_param is not None
 
-            start_time = time.time()
+            timing = []
             for _ in range(n_trials):
+                start_time = time.time()
                 compute_room_irs(
                     room_dim=[8, 9, 3],
                     room_properties=0.5,  # rt60
@@ -65,9 +69,9 @@ def profile_room_gen(n_trials):
                     ray_tracing=True,
                     ray_tracing_param=ray_tracing_param,
                 )
-            proc_time[n_rays][_software] = (time.time() - start_time) / float(
-                n_trials
-            )
+                timing.append(time.time() - start_time)
+            proc_time[n_rays][_software] = np.mean(timing)
+            proc_time_std[n_rays][_software] = np.std(timing)
             print(
                 "{} : {} seconds".format(
                     _software, proc_time[n_rays][_software]
@@ -75,14 +79,27 @@ def profile_room_gen(n_trials):
             )
 
     pprint.pprint(proc_time)
+    pprint.pprint(proc_time_std)
 
     # plot results
     plt.figure()
     for i, _software in enumerate(software):
         _proc_time = []
+        _proc_time_std = []
         for n_rays in n_ray_vals:
             _proc_time.append(proc_time[n_rays][_software])
+            _proc_time_std.append(proc_time_std[n_rays][_software])
+        _proc_time = np.array(_proc_time)
+        _proc_time_std = np.array(_proc_time_std)
+
         plt.loglog(n_ray_vals, _proc_time, label=_software, marker=markers[i])
+        ax = plt.gca()
+        ax.fill_between(
+            n_ray_vals,
+            (_proc_time - n_std * _proc_time_std),
+            (_proc_time + n_std * _proc_time_std),
+            alpha=0.2,
+        )
 
     plt.legend()
     plt.xlabel("Number of rays")

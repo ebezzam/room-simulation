@@ -1,6 +1,6 @@
 # Room impulse response generation code
 
-Supporting code for the paper "A study on more realistic room simulation for far-field keyword spotting".
+Supporting code for the paper ["A study on more realistic room simulation for far-field keyword spotting"](http://arxiv.org/abs/2006.02774).
 
 Measured RIR dataset can be downloaded [here](https://speech.fit.vutbr.cz/software/but-speech-fit-reverb-database).
 

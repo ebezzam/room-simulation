@@ -1,6 +1,5 @@
 materials_absorption_table = {
     "anechoic": {"description": "Anechoic material", "coeffs": [1.0]},
-
     # Massive constructions and hard surfaces
     "hard_surface": {
         "description": "Walls, hard surfaces average (brick walls, plaster, "
